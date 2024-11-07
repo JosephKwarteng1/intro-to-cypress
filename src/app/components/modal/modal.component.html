@@ -1,0 +1,45 @@
+<dialog
+  #modal
+  (click)="onOutsideClick($event)"
+  (keydown)="onCloseKeyDown($event)"
+  role="alertdialog"
+  aria-modal="true"
+  [attr.aria-labelledby]="modalTitleId"
+  [attr.aria-describedby]="modalDescriptionId"
+  tabindex="0"
+  [ngStyle]="{ 'min-width': minWidth }"
+>
+  <div class="modal_content">
+    <div
+      class="title_container"
+      [class.title_bg]="hasTitleBg"
+      [ngClass]="{ 'remove-border-bottom': !showTitle }"
+    >
+      <h2
+        *ngIf="showTitle"
+        id="{{ modalTitleId }}"
+        [ngClass]="{ title_centered: isTitleCentered }"
+      >
+        {{ title }}
+      </h2>
+      <button
+        *ngIf="showCloseButton"
+        class="close_button"
+        [ngClass]="{ 'push-right': !showTitle }"
+        (click)="closeModal()"
+        (keydown)="onCloseKeyDown($event)"
+        aria-label="Close"
+      >
+        <img src="assets/images/baseline_close.svg" alt="Close" />
+      </button>
+    </div>
+    <div
+      class="content"
+      [class.no_padding]="!padContent"
+      id="{{ modalDescriptionId }}"
+    >
+      <ng-content></ng-content>
+    </div>
+  </div>
+</dialog>
+<div class="backdrop"></div>

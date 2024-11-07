@@ -1,0 +1,136 @@
+@keyframes dialogOpenAnimation {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes dialogCloseAnimation {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(191, 199, 215, 0.4);
+  z-index: 1050;
+  display: block;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  dialog {
+    min-width: 90% !important;
+  }
+}
+
+dialog:not([open]) {
+  display: none;
+}
+
+dialog[open] {
+  animation: dialogOpenAnimation 0.15s ease-out forwards;
+}
+
+dialog.closing {
+  animation: dialogCloseAnimation 0.15s ease-out forwards;
+}
+
+.modal_content {
+  margin-bottom: 3rem;
+
+  .title_container {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ced4da;
+    padding: 0.85rem 1rem;
+
+    .title_centered {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    &.title_bg {
+      background-color: #f6f6f6;
+    }
+
+    .close_button {
+      background: none;
+      border: none;
+    }
+
+    img {
+      cursor: pointer;
+    }
+
+    img:hover {
+      color: #ccc;
+      border-radius: 14px;
+    }
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #374151;
+  }
+
+  .content {
+    padding: 1.25rem;
+  }
+
+  .content.no_padding {
+    padding: 0;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(64, 63, 63, 0.4);
+  z-index: 1040;
+  display: none;
+  backdrop-filter: blur(5px);
+}
+
+dialog[open] + .backdrop {
+  display: block;
+}
+
+.no_scroll {
+  overflow: hidden;
+}
+
+.push-right {
+  margin-left: auto;
+}
+
+.remove-border-bottom {
+  border-bottom: none !important;
+}
